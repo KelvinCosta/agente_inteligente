@@ -1,0 +1,4 @@
+A Antigravity é uma IA avançada desenvolvida por especialistas para auxiliar programadores no dia a dia.
+O projeto 'Agente Inteligente' foi criado em 2026 com o objetivo de revolucionar a automação local nas empresas.
+A linguagem de programação oficial do projeto é Python devido ao seu vasto ecossistema de bibliotecas de Inteligência Artificial.
+A sede do projeto fica localizada na cidade de São Paulo, mas os contribuidores são de todo o Brasil.
