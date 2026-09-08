@@ -17,10 +17,13 @@ from langchain_core.output_parsers import StrOutputParser
 #   ollama run llama3
 
 MODEL_NAME = "llama3"
+MODEL_NAME = "llama3.2:1b"
 # Estamos usando o próprio llama3 para gerar os embeddings (representações vetoriais dos textos)
 # para facilitar o setup. Em um ambiente de produção, modelos como 'nomic-embed-text' 
 # ou modelos do HuggingFace são mais eficientes para isso.
 EMBEDDING_MODEL = "llama3" 
+EMBEDDING_MODEL = "llama3.2:1b" 
+EMBEDDING_MODEL = "nomic-embed-text" 
 
 # ==========================================
 # 2. Carregar e Processar Documentos
@@ -119,6 +122,7 @@ if __name__ == "__main__":
     
     print("\n" + "="*50)
     print("🤖 Agente Llama 3 (RAG) Iniciado!")
+    print("Agente Llama 3 (RAG) Iniciado!")
     print("Base de dados 'dados_exemplo.txt' carregada com sucesso.")
     print("Faça uma pergunta sobre o conteúdo do arquivo (ou digite 'sair').")
     print("="*50 + "\n")
@@ -138,6 +142,8 @@ if __name__ == "__main__":
             # Invoca a cadeia (Chain) passando a pergunta
             response = agent_chain.invoke(user_input)
             print(f"🤖 Agente: {response}\n")
+            print(f"Agente: {response}\n")
+
             
         except KeyboardInterrupt:
             print("\nEncerrando agente. Até logo!")
