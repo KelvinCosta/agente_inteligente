@@ -22,7 +22,6 @@ MODEL_NAME = "llama3.2:1b"
 # para facilitar o setup. Em um ambiente de produção, modelos como 'nomic-embed-text' 
 # ou modelos do HuggingFace são mais eficientes para isso.
 EMBEDDING_MODEL = "llama3" 
-EMBEDDING_MODEL = "llama3.2:1b" 
 EMBEDDING_MODEL = "nomic-embed-text" 
 
 # ==========================================
@@ -53,7 +52,7 @@ def setup_vectorstore(splits):
     # Ele permite buscar semanticamente qual pedaço de texto mais se parece com a pergunta do usuário.
     vectorstore = Chroma.from_documents(
         documents=splits,
-        embedding=OllamaEmbeddings(model=EMBEDDING_MODEL)
+        embedding=OllamaEmbeddings(model=EMBEDDING_MODEL, keep_alive=0, num_gpu=0)
     )
     # Transforma o banco de dados em uma ferramenta de busca (retriever)
     # k=3 significa que ele vai retornar os 3 pedaços de texto mais relevantes.
@@ -67,7 +66,7 @@ def create_rag_chain(retriever):
     
     # Instancia o LLM local rodando via Ollama
     # temperature=0.3 deixa o modelo mais focado e menos "criativo" (ideal para RAG)
-    llm = ChatOllama(model=MODEL_NAME, temperature=0.3)
+    llm = ChatOllama(model=MODEL_NAME, temperature=0.3, keep_alive=0, num_gpu=0)
     
     # Prompt do Sistema Genérico para RAG
     # Define o comportamento do agente e a regra de ouro do RAG: usar apenas o contexto.
@@ -121,7 +120,6 @@ if __name__ == "__main__":
     agent_chain = create_rag_chain(retriever)
     
     print("\n" + "="*50)
-    print("🤖 Agente Llama 3 (RAG) Iniciado!")
     print("Agente Llama 3 (RAG) Iniciado!")
     print("Base de dados 'dados_exemplo.txt' carregada com sucesso.")
     print("Faça uma pergunta sobre o conteúdo do arquivo (ou digite 'sair').")
@@ -141,7 +139,6 @@ if __name__ == "__main__":
             print("Agente: Lendo base de dados e pensando...")
             # Invoca a cadeia (Chain) passando a pergunta
             response = agent_chain.invoke(user_input)
-            print(f"🤖 Agente: {response}\n")
             print(f"Agente: {response}\n")
 
             
